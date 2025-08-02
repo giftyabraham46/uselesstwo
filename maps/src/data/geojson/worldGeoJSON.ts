@@ -1,0 +1,54 @@
+import { FeatureCollection, Feature, Geometry } from 'geojson';
+
+const worldGeoJSON: FeatureCollection = {
+  type: 'FeatureCollection',
+  features: [
+    {
+      type: 'Feature',
+      properties: {
+        name: 'Ocean',
+        description: 'A vast body of salt water.'
+      },
+      geometry: {
+        type: 'Polygon',
+        coordinates: [
+          [
+            [-180, -90],
+            [180, -90],
+            [180, 90],
+            [-180, 90],
+            [-180, -90]
+          ]
+        ]
+      }
+    },
+    {
+      type: 'Feature',
+      properties: {
+        name: 'Mountain',
+        description: 'A large landform that rises prominently above its surroundings.'
+      },
+      geometry: {
+        type: 'Point',
+        coordinates: [34.0, 36.0]
+      }
+    },
+    {
+      type: 'Feature',
+      properties: {
+        name: 'Street',
+        description: 'A public road in a city or town.'
+      },
+      geometry: {
+        type: 'LineString',
+        coordinates: [
+          [34.0, 36.0],
+          [34.1, 36.1],
+          [34.2, 36.2]
+        ]
+      }
+    }
+  ]
+};
+
+export default worldGeoJSON;

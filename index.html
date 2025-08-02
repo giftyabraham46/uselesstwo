@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Projects Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .project-panel {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .project-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .project-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-iframe {
+            flex: 1;
+            border: none;
+            border-radius: 10px;
+            min-height: 600px;
+            background: #f8f9fa;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #43cea2, #185a9d);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        .status-online {
+            background-color: #4CAF50;
+        }
+
+        .status-offline {
+            background-color: #f44336;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .project-iframe {
+                min-height: 400px;
+            }
+        }
+
+        .loading-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background: #f8f9fa;
+            border-radius: 10px;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin-right: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 Hackathon Projects Hub</h1>
+        <p>Connecting innovative solutions - Tree Calculator & Interactive World Map</p>
+    </div>
+
+    <div class="main-container">
+        <!-- Tree Calculator Project -->
+        <div class="project-panel">
+            <div class="project-header">
+                <h2 class="project-title">🌳 Tree Calculator</h2>
+                <p class="project-description">
+                    AI-powered tool that uses 2D images to estimate tree dimensions and generate 3D foliage reconstructions.
+                    Upload front and side view images to analyze height, width, depth, and leaf patterns.
+                </p>
+                <div class="controls">
+                    <button class="btn" onclick="refreshTreeApp()">🔄 Refresh</button>
+                    <a href="http://localhost:3000" target="_blank" class="btn btn-secondary">🔗 Open in New Tab</a>
+                </div>
+                <div id="tree-status">
+                    <span class="status-indicator status-offline"></span>
+                    <span>Connecting to port 3000...</span>
+                </div>
+            </div>
+            <iframe 
+                id="tree-iframe" 
+                class="project-iframe" 
+                src="http://localhost:3000"
+                title="Tree Calculator Application">
+                <div class="loading-screen">
+                    <div class="spinner"></div>
+                    Loading Tree Calculator...
+                </div>
+            </iframe>
+        </div>
+
+        <!-- Interactive World Map Project -->
+        <div class="project-panel">
+            <div class="project-header">
+                <h2 class="project-title">🗺️ Interactive World Map</h2>
+                <p class="project-description">
+                    Explore the world with our interactive map featuring detailed zoom capabilities.
+                    Discover streets, mountains, oceans, and geographical features with precise navigation.
+                </p>
+                <div class="controls">
+                    <button class="btn" onclick="refreshMapApp()">🔄 Refresh</button>
+                    <a href="http://localhost:3001" target="_blank" class="btn btn-secondary">🔗 Open in New Tab</a>
+                </div>
+                <div id="map-status">
+                    <span class="status-indicator status-offline"></span>
+                    <span>Connecting to port 3001...</span>
+                </div>
+            </div>
+            <iframe 
+                id="map-iframe" 
+                class="project-iframe" 
+                src="http://localhost:3001"
+                title="Interactive World Map Application">
+                <div class="loading-screen">
+                    <div class="spinner"></div>
+                    Loading Interactive Map...
+                </div>
+            </iframe>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>💡 Hackathon 2025 - Innovative Solutions for Real-World Problems</p>
+    </div>
+
+    <script>
+        // Function to check if an iframe has loaded successfully
+        function checkIframeStatus(iframe, statusElement, appName) {
+            const statusIndicator = statusElement.querySelector('.status-indicator');
+            const statusText = statusElement.querySelector('span:last-child');
+            
+            iframe.onload = function() {
+                try {
+                    // Try to access the iframe content to check if it loaded successfully
+                    statusIndicator.className = 'status-indicator status-online';
+                    statusText.textContent = `${appName} - Connected ✓`;
+                } catch (e) {
+                    // If there's an error, it might still be loading or there could be CORS issues
+                    statusIndicator.className = 'status-indicator status-online';
+                    statusText.textContent = `${appName} - Running on port`;
+                }
+            };
+            
+            iframe.onerror = function() {
+                statusIndicator.className = 'status-indicator status-offline';
+                statusText.textContent = `${appName} - Connection failed ✗`;
+            };
+        }
+
+        // Function to refresh the tree calculator app
+        function refreshTreeApp() {
+            const iframe = document.getElementById('tree-iframe');
+            iframe.src = iframe.src;
+        }
+
+        // Function to refresh the map app
+        function refreshMapApp() {
+            const iframe = document.getElementById('map-iframe');
+            iframe.src = iframe.src;
+        }
+
+        // Check connection status for both apps
+        function checkConnections() {
+            const treeIframe = document.getElementById('tree-iframe');
+            const mapIframe = document.getElementById('map-iframe');
+            const treeStatus = document.getElementById('tree-status');
+            const mapStatus = document.getElementById('map-status');
+
+            checkIframeStatus(treeIframe, treeStatus, 'Tree Calculator');
+            checkIframeStatus(mapIframe, mapStatus, 'Interactive Map');
+        }
+
+        // Initialize connection checking
+        window.addEventListener('load', function() {
+            checkConnections();
+            
+            // Periodically check connection status
+            setInterval(function() {
+                // Simple ping to check if services are running
+                fetch('http://localhost:3000', { mode: 'no-cors' })
+                    .then(() => {
+                        const indicator = document.querySelector('#tree-status .status-indicator');
+                        const text = document.querySelector('#tree-status span:last-child');
+                        indicator.className = 'status-indicator status-online';
+                        text.textContent = 'Tree Calculator - Connected ✓';
+                    })
+                    .catch(() => {
+                        const indicator = document.querySelector('#tree-status .status-indicator');
+                        const text = document.querySelector('#tree-status span:last-child');
+                        indicator.className = 'status-indicator status-offline';
+                        text.textContent = 'Tree Calculator - Offline ✗';
+                    });
+
+                fetch('http://localhost:3001', { mode: 'no-cors' })
+                    .then(() => {
+                        const indicator = document.querySelector('#map-status .status-indicator');
+                        const text = document.querySelector('#map-status span:last-child');
+                        indicator.className = 'status-indicator status-online';
+                        text.textContent = 'Interactive Map - Connected ✓';
+                    })
+                    .catch(() => {
+                        const indicator = document.querySelector('#map-status .status-indicator');
+                        const text = document.querySelector('#map-status span:last-child');
+                        indicator.className = 'status-indicator status-offline';
+                        text.textContent = 'Interactive Map - Offline ✗';
+                    });
+            }, 5000); // Check every 5 seconds
+        });
+
+        // Handle iframe communication and errors gracefully
+        window.addEventListener('message', function(event) {
+            // Handle messages from iframes if needed
+            console.log('Message received from iframe:', event.data);
+        });
+    </script>
+</body>
+</html>
