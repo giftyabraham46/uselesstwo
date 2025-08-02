@@ -108,6 +108,10 @@ For Software:
 #### Video
 
 
+https://github.com/user-attachments/assets/97a3680a-2cd9-4c74-8ac9-433da9c27c37
+
+
+
 #### Additional Demos
 - **Live Interactive Map**: Navigate through scenic locations with real-time left/right notifications
 - **Tree Analysis Demo**: Upload sample tree images to see AI-powered leaf count estimation
